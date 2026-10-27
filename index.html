@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>北京飞球吊装与通信测试简报</title>
+  <style>
+    :root{
+      --ink:#183043;--muted:#627686;--blue:#236b92;--blue-soft:#eaf3f8;
+      --orange:#d17632;--orange-soft:#fff3e8;--green:#2f7b66;--green-soft:#eaf5f1;
+      --line:#d5e0e7;--paper:#fff;--back:#e8edf1;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--back);color:var(--ink);font-family:"Microsoft YaHei UI","Microsoft YaHei","PingFang SC",sans-serif;line-height:1.55}
+    button{font:inherit;cursor:pointer}
+    .toolbar{height:52px;display:flex;align-items:center;gap:12px;padding:0 22px;background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:5}
+    .toolbar strong{font-size:15px;margin-right:auto}.toolbar button{border:1px solid #b9c8d1;background:#f7fafb;color:#29475a;border-radius:4px;padding:5px 12px}
+    .toolbar button.active{background:var(--blue);border-color:var(--blue);color:#fff}
+    main{padding:22px 0 30px}
+    .sheet{width:1500px;height:844px;margin:auto;background:var(--paper);box-shadow:0 4px 22px #17364a1a;padding:36px 48px 32px;overflow:hidden;position:relative}
+    header{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2px solid #aac3d2;padding-bottom:17px;margin-bottom:21px}
+    .eyebrow{font-size:15px;color:var(--blue);font-weight:700;letter-spacing:.08em;margin-bottom:5px}
+    h1{font-size:34px;line-height:1.25;margin:0;letter-spacing:-.5px}
+    .subtitle{font-size:16px;color:var(--muted);margin-top:5px}
+    .date{font-size:15px;color:var(--muted);padding-bottom:4px}
+    .content{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:14px 18px;height:495px}
+    .card{border:1px solid var(--line);border-radius:8px;padding:17px 19px;background:#fff;overflow:hidden}
+    .card h2{font-size:20px;margin:0 0 11px;display:flex;align-items:center;gap:9px}.card h2::before{content:"";width:5px;height:20px;background:var(--blue);border-radius:3px}
+    .card h3{font-size:16px;margin:13px 0 5px;color:#294e66}.card p{font-size:15px;margin:0 0 8px}.card ul{margin:7px 0 0;padding-left:21px;font-size:15px}.card li{margin:6px 0}
+    .battery{background:#fff}
+    .change{background:#fff}
+    .change h2::before{background:var(--green)}
+    .change h3{margin:6px 0 1px}.change p{margin-bottom:2px;font-size:14px;line-height:1.45}
+    .bottom{display:grid;grid-template-columns:1.15fr 1fr;gap:17px;margin-top:14px}
+    .summary,.boundary{border-radius:8px;padding:11px 18px;min-height:88px}
+    .summary{background:#eaf3f8;border-left:5px solid var(--blue)}.boundary{background:#fff4e9;border-left:5px solid var(--orange)}
+    .bottom h2{font-size:18px;margin:0 0 6px}.bottom p{font-size:15px;margin:0}
+    footer{position:absolute;bottom:12px;left:48px;right:48px;display:flex;justify-content:space-between;color:#7b8b96;font-size:12px;border-top:1px solid var(--line);padding-top:7px}
+    body.editing [data-edit]{outline:1px dashed #7fa3b8;outline-offset:2px;background:#fffdf1}
+    @media screen and (max-width:1525px){.sheet{transform-origin:top center;transform:scale(calc((100vw - 20px)/1500));margin-bottom:calc(-844px + (844px * ((100vw - 20px)/1500)))} }
+    @media print{@page{size:A4 landscape;margin:0}body{background:#fff;-webkit-print-color-adjust:exact;print-color-adjust:exact}.toolbar{display:none}.sheet{width:1500px;height:844px;transform:scale(.748);transform-origin:top left;margin:0;box-shadow:none;page-break-after:avoid}main{padding:0}}
+  </style>
+</head>
+<body>
+  <div class="toolbar"><strong>北京飞球吊装测试 · 一页简报</strong><button id="edit">编辑文字</button><button id="save">保存副本</button><button onclick="print()">打印 / PDF</button></div>
+  <main>
+    <section class="sheet">
+      <header>
+        <div><div class="eyebrow" data-edit>北京飞球测试</div><h1 data-edit>飞球雷达续航与吊装通信测试</h1><p class="subtitle" data-edit>续航满足地面测试需求；安装位置和动态升空过程仍会影响电台通信</p></div>
+        <div class="date" data-edit>第一次吊装：10 月 22 日　第二次吊装：10 月 27 日</div>
+      </header>
+
+      <div class="content">
+        <article class="card battery">
+          <h2 data-edit>电池续航测试</h2>
+          <p data-edit>雷达朝天工作，两块 10 Ah 电池运行约 3 小时 20 分钟，与约 160 W 功耗基本相符。考虑高空低温容量损失，建议正式飞球采用两块 20 Ah 电池。</p>
+        </article>
+
+        <article class="card">
+          <h2 data-edit>第一次吊装发现的问题</h2>
+          <p data-edit>电台放在泡沫保温箱与雷达桶夹缝中。电台接触甚至靠近桶壁时，板卡侧电台 USB 会断联并停止发数；增加 USB 日志后确认了掉线和重新枚举过程。</p>
+          <p data-edit>将电台移到泡沫箱外侧后，靠近桶壁造成的 USB 掉线暂时消失，但无线传输稳定问题仍未解决。</p>
+        </article>
+
+        <article class="card change">
+          <h2 data-edit>第一次测试后的程序改动</h2>
+          <h3 data-edit>1. 补充电台 USB 和通信日志</h3>
+          <p data-edit>记录 USB 掉线和重新枚举，以及板端发送、电脑请求、回复和重新握手，用于区分 USB 故障与无线断链。</p>
+          <h3 data-edit>2. 改为断联后持续重连</h3>
+          <p data-edit>取消超时等待和长时间退避，断联后持续尝试，链路恢复后立即重新握手。</p>
+          <h3 data-edit>3. 增加高速串口维护模式</h3>
+          <p data-edit>地面直连可用 460800 查看完整状态、导出日志和功率谱、更新程序；飞行电台仍使用 9600。</p>
+        </article>
+
+        <article class="card">
+          <h2 data-edit>第二次吊装结果</h2>
+          <p data-edit>雷达在离地约 5 m 处长时间通信稳定，姿态数据可以按 1 Hz 实时回读。</p>
+          <p data-edit>上升到约 20 m 后开始断联，只能收到部分残缺数据包；到约 30 m 高度稳定悬停后，通信重新恢复。</p>
+          <p data-edit>吊车上升速度估计低于 1 m/s，而飞球约为 15 m/s，当前结果还不能证明快速升空过程中的通信可靠性。</p>
+        </article>
+      </div>
+
+      <div class="bottom">
+        <section class="summary"><h2 data-edit>现有保底</h2><p data-edit>启动采集后，只要供电正常、激光器没有告警，即使电台断联，板卡仍会持续采集并在本地保存数据。</p></section>
+        <section class="boundary"><h2 data-edit>当前判断边界</h2><p data-edit>吊装时飞控电台约 100 B/s 时较稳定，本系统约 300 B/s 时不稳定，但现有测试不足以证明数据量是主要原因。</p></section>
+      </div>
+
+      <footer><span>CDL5 5 kHz 飞球版本</span><span>北京吊装测试简报 · 2026 年 10 月</span></footer>
+    </section>
+  </main>
+  <script>
+    const editable=[...document.querySelectorAll('[data-edit]')];
+    const edit=document.querySelector('#edit');
+    edit.onclick=()=>{const on=document.body.classList.toggle('editing');editable.forEach(e=>{if(on){e.contentEditable='true';e.spellcheck=false}else e.removeAttribute('contenteditable')});edit.textContent=on?'结束编辑':'编辑文字';edit.classList.toggle('active',on)};
+    document.querySelector('#save').onclick=()=>{const clone=document.documentElement.cloneNode(true);clone.querySelector('body').classList.remove('editing');clone.querySelectorAll('[contenteditable]').forEach(e=>e.removeAttribute('contenteditable'));clone.querySelector('#edit').textContent='编辑文字';clone.querySelector('#edit').classList.remove('active');const blob=new Blob(['<!DOCTYPE html>\n'+clone.outerHTML],{type:'text/html;charset=utf-8'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='北京飞球吊装与通信测试简报_编辑版.html';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)};
+  </script>
+</body>
+</html>
